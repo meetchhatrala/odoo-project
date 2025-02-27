@@ -4,3 +4,4 @@ django-cors-headers
 djongo
 djangorestframework-simplejwt
 pymongo==3.12.3
+pytz
