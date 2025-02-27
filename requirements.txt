@@ -3,5 +3,6 @@ djongo
 djangorestframework
 django-cors-headers
 djangorestframework-simplejwt
-pymongo==3.12.3
 pytz
+pymongo[srv]
+dnspython
