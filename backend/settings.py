@@ -93,7 +93,8 @@ DATABASES = {
         'NAME': 'Django',  # Your MongoDB database name
         'ENFORCE_SCHEMA': False,
         'CLIENT': {
-            'host': 'mongodb+srv://mtpatel:Kpvad8Js33ABSoaq@cluster0.ol4jj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'  # MongoDB Compass connection
+            'host': 'mongodb+srv://mtpatel:Kpvad8Js33ABSoaq@cluster0.ol4jj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0',  # MongoDB Compass connection
+            'tls': True
         }
     }
 }
