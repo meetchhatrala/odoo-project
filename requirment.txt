@@ -1,0 +1,5 @@
+pip install django djangorestframework
+pip install django-cors-headers
+pip install djangorestframework djongo djangorestframework-simplejwt
+pip install djongo==1.3.6
+pip install pymongo==3.12.3
