@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import ssl
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -94,7 +95,8 @@ DATABASES = {
         'ENFORCE_SCHEMA': False,
         'CLIENT': {
             'host': 'mongodb+srv://mtpatel:Kpvad8Js33ABSoaq@cluster0.ol4jj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0',  # MongoDB Compass connection
-            'tls': True
+            'tls': True,
+            'ssl_cert_reqs': ssl.CERT_NONE,
         }
     }
 }
