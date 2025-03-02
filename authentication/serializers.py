@@ -36,30 +36,61 @@
 #         return representation
 
 
+# from rest_framework import serializers
+# from bson import ObjectId
+# from .models import User
+
+# class UserSerializer(serializers.ModelSerializer):
+#     id = serializers.CharField(read_only=True)  
+
+#     class Meta:
+#         model = User
+#         fields = ['id', 'email', 'name', 'password']
+#         extra_kwargs = {'password': {'write_only': True}}  
+
+#     def create(self, validated_data):
+#         """ Hash password before saving user """
+#         user = User(
+#             email=validated_data['email'],
+#             name=validated_data['name']
+#         )
+#         user.set_password(validated_data['password'])  # Hash the password
+#         user.save()
+#         return user
+
+#     def to_representation(self, instance):
+#         """ Convert ObjectId to string for JSON response """
+#         representation = super().to_representation(instance)
+#         representation['id'] = str(instance.id) if isinstance(instance.id, ObjectId) else instance.id
+#         return representation
+
+
 from rest_framework import serializers
 from bson import ObjectId
 from .models import User
 
+class ObjectIdField(serializers.Field):
+    """ Custom field to handle ObjectId conversion """
+
+    def to_representation(self, value):
+        return str(value) if isinstance(value, ObjectId) else value
+
+    def to_internal_value(self, data):
+        return ObjectId(data) if ObjectId.is_valid(data) else data
+
 class UserSerializer(serializers.ModelSerializer):
-    id = serializers.CharField(read_only=True)  
+    id = ObjectIdField(read_only=True)  # Convert ObjectId to string
 
     class Meta:
         model = User
         fields = ['id', 'email', 'name', 'password']
-        extra_kwargs = {'password': {'write_only': True}}  
+        extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
-        """ Hash password before saving user """
         user = User(
             email=validated_data['email'],
             name=validated_data['name']
         )
-        user.set_password(validated_data['password'])  # Hash the password
+        user.set_password(validated_data['password'])
         user.save()
         return user
-
-    def to_representation(self, instance):
-        """ Convert ObjectId to string for JSON response """
-        representation = super().to_representation(instance)
-        representation['id'] = str(instance.id) if isinstance(instance.id, ObjectId) else instance.id
-        return representation

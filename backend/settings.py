@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import ssl
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,6 +28,7 @@ SECRET_KEY = 'django-insecure-#8r=se%i+@(e#-jt11%xgk%tpi_25wjovs0j!!y&ou1qz8*^fq
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
+PORT = os.getenv("PORT", "10000") 
 
 
 # Application definition
@@ -42,6 +44,7 @@ INSTALLED_APPS = [
     'corsheaders', 
     "rest_framework_simplejwt",
     "authentication",
+    'chatbot',
 ]
 
 MIDDLEWARE = [
